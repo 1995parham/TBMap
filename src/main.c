@@ -18,6 +18,18 @@
 int main(int argc, char *argv[])
 {
 	int fd = open("image.bmp", O_RDONLY);
-	struct BITMAP_HEADER *bmph = bitmap_header_new_from_fd(fd);
-	printf("%d\n", bmph->info_header.colors_in_color_table);
+	struct BITMAP_IMAGE *bmp_image = bitmap_image_new_from_fd(fd);
+	int i;
+	bitmap_image_header(bmp_image);
+	printf("%d\n", bmp_image->info_header->colors_in_color_table);
+	printf("%u\n", bmp_image->info_header->image_width);
+	bitmap_image_color_table(bmp_image);
+	for (i = 0; i < bmp_image->info_header->colors_in_color_table; i++) {
+		printf("****\n");
+		printf("%u\n", bmp_image->color_table[i].red);
+		printf("%u\n", bmp_image->color_table[i].green);
+		printf("%u\n", bmp_image->color_table[i].blue);
+		printf("%u\n", bmp_image->color_table[i].reserved);
+		printf("****\n");
+	}
 }

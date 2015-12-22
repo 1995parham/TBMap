@@ -17,20 +17,63 @@
 #include <stdlib.h>
 #include "bitmap.h"
 
-struct BITMAP_HEADER *bitmap_header_new()
+struct BITMAP_IMAGE *bitmap_image_new_from_fd(int fd)
 {
-	struct BITMAP_HEADER *new = malloc(sizeof(struct BITMAP_HEADER));
-	return new;
+	struct BITMAP_IMAGE *image = malloc(sizeof(struct BITMAP_IMAGE));
+	image->fd = fd;
+	image->info_header = NULL;
+	image->file_header = NULL;
+	image->color_table = NULL;
+	return image;
 }
 
-struct BITMAP_HEADER *bitmap_header_new_from_fd(int fd)
+
+ssize_t bitmap_image_color_table(struct BITMAP_IMAGE *image)
 {
-	struct BITMAP_HEADER *new = bitmap_header_new();
-	read(fd, new, sizeof(struct BITMAP_HEADER));
-	return new;
+	if (image->file_header == NULL || image->info_header == NULL)
+		return -1;
+	if (image->info_header->colors_in_color_table == 0)
+		return 0;
+
+	lseek(image->fd, (off_t) (sizeof(struct BITMAP_FILE_HEADER) +
+	                          image->info_header->dib_header_size),
+		SEEK_SET);
+
+	int i;
+	ssize_t retval = 0;
+
+	image->color_table = malloc(image->info_header->colors_in_color_table *
+	                            sizeof(struct RGBQUAD));
+	for (i = 0; i < image->info_header->colors_in_color_table; i++) {
+		retval += read(image->fd, image->color_table + i,
+			sizeof(struct RGBQUAD));
+	}
+
+	return retval;
+
 }
 
-struct BITMAP_HEADER *bitmap_header_new_from_file(FILE *file)
+
+ssize_t bitmap_image_header(struct BITMAP_IMAGE *image)
 {
+	lseek(image->fd, 0, SEEK_SET);
+
+	ssize_t retval;
+
+	image->file_header = malloc(sizeof(struct BITMAP_FILE_HEADER));
+	retval = read(image->fd, image->file_header,
+		sizeof(struct BITMAP_FILE_HEADER));
+	if (retval < sizeof(struct BITMAP_FILE_HEADER))
+		return retval;
+
+	image->info_header = malloc(sizeof(struct BITMAP_INFO_HEADER));
+	retval += read(image->fd, image->info_header,
+		sizeof(struct BITMAP_INFO_HEADER));
+	if (retval - sizeof(struct BITMAP_FILE_HEADER) <
+	    sizeof(struct BITMAP_INFO_HEADER))
+		return retval;
+
+	return retval;
 }
+
 

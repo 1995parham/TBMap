@@ -46,6 +46,29 @@
 #include <stdint.h>
 #include <stdio.h>
 
+struct RGBAX {
+	/*
+	 * The intensity of blue in the color.
+	 */
+	uint32_t blue;
+	/*
+	 * The intensity of green in the color.
+	 */
+	uint32_t green;
+	/*
+	 * The intensity of red in the color.
+	 */
+	uint32_t red;
+	/*
+	 *
+	 */
+	uint32_t alpha;
+	/*
+	 *
+	 */
+	uint32_t none;
+};
+
 struct RGBQUAD {
 	/*
 	 * The intensity of blue in the color.
@@ -160,15 +183,17 @@ struct BITMAP_INFO_HEADER {
 	uint32_t important_color_count;
 } __attribute__((packed));
 
-struct BITMAP_HEADER {
-	struct BITMAP_FILE_HEADER file_header;
-	struct BITMAP_INFO_HEADER info_header;
-} __attribute__((packed));
+struct BITMAP_IMAGE {
+	int fd;
+	struct BITMAP_FILE_HEADER *file_header;
+	struct BITMAP_INFO_HEADER *info_header;
+	struct RGBQUAD *color_table;
+};
 
-struct BITMAP_HEADER *bitmap_header_new();
+struct BITMAP_IMAGE *bitmap_image_new_from_fd(int fd);
 
-struct BITMAP_HEADER *bitmap_header_new_from_fd(int fd);
+ssize_t bitmap_image_header(struct BITMAP_IMAGE *image);
 
-struct BITMAP_HEADER *bitmap_header_new_from_file(FILE *file);
+ssize_t bitmap_image_color_table(struct BITMAP_IMAGE *image);
 
 #endif
