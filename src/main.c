@@ -19,5 +19,5 @@ int main(int argc, char *argv[])
 {
 	int fd = open("image.bmp", O_RDONLY);
 	struct BITMAP_HEADER *bmph = bitmap_header_new_from_fd(fd);
-	printf("%d\n", bmph->file_header.file_size);
+	printf("%d\n", bmph->info_header.colors_in_color_table);
 }
