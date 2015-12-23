@@ -27,13 +27,13 @@ int main(int argc, char *argv[])
 		printf("****\n");
 		printf("%u\n", bmp_image->color_table[i].red);
 		bmp_image->color_table[i].red =
-			255 - bmp_image->color_table[i].red;
+			(uint8_t) 0xff ^ bmp_image->color_table[i].red;
 		printf("%u\n", bmp_image->color_table[i].green);
 		bmp_image->color_table[i].green =
-			255 - bmp_image->color_table[i].green;
+			(uint8_t) 0xff ^ bmp_image->color_table[i].green;
 		printf("%u\n", bmp_image->color_table[i].blue);
 		bmp_image->color_table[i].blue =
-			255 - bmp_image->color_table[i].blue;
+			(uint8_t) 0xff ^ bmp_image->color_table[i].blue;
 		printf("%u\n", bmp_image->color_table[i].reserved);
 		printf("****\n");
 	}
