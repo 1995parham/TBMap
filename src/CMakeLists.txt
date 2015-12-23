@@ -6,7 +6,7 @@
 #
 # [] Created By : Parham Alvani (parham.alvani@gmail.com)
 # =======================================
-add_executable(TBMap.out bitmap.h main.c bitmap.c)
+add_executable(TBMap.out bitmap.h main.c bitmap.c common.c common.h)
 
 
 # Add personal c flags

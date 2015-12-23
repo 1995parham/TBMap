@@ -45,6 +45,8 @@
 
 #include <stdint.h>
 #include <stdio.h>
+#include <fcntl.h>
+#include "common.h"
 
 struct RGBAX {
 	/*
@@ -188,7 +190,17 @@ struct BITMAP_IMAGE {
 	struct BITMAP_FILE_HEADER *file_header;
 	struct BITMAP_INFO_HEADER *info_header;
 	struct RGBQUAD *color_table;
+	struct RGBAX **pixel_table;
 };
+
+#define TEST_W_FD(fd)                                                      \
+        do {                                                               \
+                if (!(fcntl(fd, F_GETFL) & O_RDWR))                        \
+                        udie("Please open device with write permission");  \
+        } while (0)                                                        \
+
+
+void bitmap_image_delete(struct BITMAP_IMAGE *image, int is_write);
 
 struct BITMAP_IMAGE *bitmap_image_new_from_fd(int fd);
 
