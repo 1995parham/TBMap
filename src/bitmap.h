@@ -196,4 +196,6 @@ ssize_t bitmap_image_header(struct BITMAP_IMAGE *image);
 
 ssize_t bitmap_image_color_table(struct BITMAP_IMAGE *image);
 
+ssize_t bitmap_image_pixel_table(struct BITMAP_IMAGE *image);
+
 #endif

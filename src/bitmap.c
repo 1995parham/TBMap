@@ -28,6 +28,11 @@ struct BITMAP_IMAGE *bitmap_image_new_from_fd(int fd)
 }
 
 
+ssize_t bitmap_image_pixel_table(struct BITMAP_IMAGE *image)
+{
+
+}
+
 ssize_t bitmap_image_color_table(struct BITMAP_IMAGE *image)
 {
 	if (image->file_header == NULL || image->info_header == NULL)
