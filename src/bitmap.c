@@ -12,7 +12,7 @@
  * Copyright (c) 2015 Parham Alvani.
 */
 
-#include <stdio.H>
+#include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include "bitmap.h"
