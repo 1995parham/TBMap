@@ -196,7 +196,7 @@ struct BITMAP_IMAGE {
 #define TEST_W_FD(fd)                                                      \
         do {                                                               \
                 if (!(fcntl(fd, F_GETFL) & O_RDWR))                        \
-                        udie("Please open device with write permission");  \
+                        udie("Please open file  with write permission");   \
         } while (0)                                                        \
 
 
