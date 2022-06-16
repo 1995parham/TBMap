@@ -1,5 +1,7 @@
 # TBMap
 
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/1995parham/TBMap/CMake?label=cmake&logo=github&style=flat-square)
+
 ## Introduction
 
 This repository was created in C programming workshop of Introduction to Programming Course Fall 2015.
