@@ -11,7 +11,7 @@ This repository was created in C programming workshop of Introduction to Program
 
 I want to thank every single person who contributed to that awesome workshop which created the basis for this project:
 
-* [Dr.Bakhshi](https://github.com/Bahador-Bakhshi)
-* [Elahe Jalalpour](https://github.com/eljalalpour)
-* [Shiva Zamani](https://github.com/shiva-z)
-* [Iman Tabrizian](https://github.com/tabrizian)
+- [Dr.Bakhshi](https://github.com/Bahador-Bakhshi)
+- [Elahe Jalalpour](https://github.com/eljalalpour)
+- [Shiva Zamani](https://github.com/shiva-z)
+- [Iman Tabrizian](https://github.com/tabrizian)
