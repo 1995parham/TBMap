@@ -11,6 +11,7 @@
 /*
  * Copyright (c) 2015 Parham Alvani.
 */
+
 /*
  * Bitmaps should be saved in a file that uses the established bitmap
  * file format and assigned a name with the three-character .bmp extension.
@@ -32,6 +33,7 @@
  * | color-index array  |
  * +--------------------+
  */
+
 #ifndef BITMAP_H
 #define BITMAP_H
 
@@ -187,6 +189,7 @@ struct BITMAP_INFO_HEADER {
 
 struct BITMAP_IMAGE {
 	int fd;
+
 	struct BITMAP_FILE_HEADER *file_header;
 	struct BITMAP_INFO_HEADER *info_header;
 	struct RGBQUAD *color_table;

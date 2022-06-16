@@ -17,6 +17,8 @@
 #include <stdlib.h>
 #include "bitmap.h"
 
+// bitmap_image_delete frees the bitmap information and if the `is_write` is true
+// then it will update the image with the latest in-memory state.
 void bitmap_image_delete(struct BITMAP_IMAGE *image, int is_write)
 {
 	int i;
@@ -66,8 +68,13 @@ struct BITMAP_IMAGE *bitmap_image_new_from_fd(int fd)
 	return image;
 }
 
+// bitmap_image_color_table must be called after `bitmap_image_header`
+// otherwise it returns -1.
 ssize_t bitmap_image_pixel_table(struct BITMAP_IMAGE *image)
 {
+	if (image->file_header == NULL)
+		return -1;
+
 	lseek(image->fd, image->file_header->file_offset_to_pixel_array,
 		SEEK_SET);
 
@@ -85,6 +92,9 @@ ssize_t bitmap_image_pixel_table(struct BITMAP_IMAGE *image)
 	return retval;
 }
 
+// bitmap_image_color_table must be called after `bitmap_image_header`
+// otherwise it returns -1.
+// it reads the color table from file.
 ssize_t bitmap_image_color_table(struct BITMAP_IMAGE *image)
 {
 	if (image->file_header == NULL || image->info_header == NULL)
@@ -111,6 +121,8 @@ ssize_t bitmap_image_color_table(struct BITMAP_IMAGE *image)
 }
 
 
+// bitmap_image_header reads file and info headers from file
+// and returns the total number of bytes that is read.
 ssize_t bitmap_image_header(struct BITMAP_IMAGE *image)
 {
 	lseek(image->fd, 0, SEEK_SET);
@@ -118,12 +130,14 @@ ssize_t bitmap_image_header(struct BITMAP_IMAGE *image)
 	ssize_t retval;
 
 	image->file_header = malloc(sizeof(struct BITMAP_FILE_HEADER));
+
 	retval = read(image->fd, image->file_header,
 		sizeof(struct BITMAP_FILE_HEADER));
 	if (retval < sizeof(struct BITMAP_FILE_HEADER))
 		return retval;
 
 	image->info_header = malloc(sizeof(struct BITMAP_INFO_HEADER));
+
 	retval += read(image->fd, image->info_header,
 		sizeof(struct BITMAP_INFO_HEADER));
 	if (retval - sizeof(struct BITMAP_FILE_HEADER) <
@@ -132,5 +146,3 @@ ssize_t bitmap_image_header(struct BITMAP_IMAGE *image)
 
 	return retval;
 }
-
-
