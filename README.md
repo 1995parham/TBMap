@@ -15,3 +15,12 @@ I want to thank every single person who contributed to that awesome workshop whi
 - [Elahe Jalalpour](https://github.com/eljalalpour)
 - [Shiva Zamani](https://github.com/shiva-z)
 - [Iman Tabrizian](https://github.com/tabrizian)
+
+## How to run?
+
+This is a cmake-based project so you can build and run it as follow:
+
+```sh
+cmake --build .
+./bin/TBMap.out
+```
