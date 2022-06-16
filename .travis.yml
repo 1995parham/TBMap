@@ -1,3 +1,0 @@
-language: c
-install: cmake .
-script: make
