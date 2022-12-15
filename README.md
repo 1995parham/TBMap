@@ -1,6 +1,6 @@
 # TBMap
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/1995parham/TBMap/CMake?label=cmake&logo=github&style=flat-square)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/1995parham/TBMap/cmake.yml?label=cmake&logo=github&style=flat-square&branch=main)
 
 ## Introduction
 
