@@ -25,6 +25,8 @@ cmake --build .
 ./bin/TBMap.out
 ```
 
-## Memories...
+## The Invitation
+
+We had sent the following invitation on Fall 2015 to all C course students.
 
 ![Memories...](./img/memories.png)
