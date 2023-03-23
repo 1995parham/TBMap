@@ -27,6 +27,7 @@ cmake --build .
 
 ## The Invitation
 
-We had sent the following invitation on Fall 2014 to all C course students.
+We had sent the following invitation on Fall 2015 to all C course students.
+The invitation date was wrong and it should be 24 Dev 2015 not 2014.
 
 ![Memories...](./img/memories.png)
