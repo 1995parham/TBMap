@@ -27,6 +27,6 @@ cmake --build .
 
 ## The Invitation
 
-We had sent the following invitation on Fall 2015 to all C course students.
+We had sent the following invitation on Fall 2014 to all C course students.
 
 ![Memories...](./img/memories.png)
